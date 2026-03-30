@@ -1,0 +1,13 @@
+public class Square extends Shape {
+    private double side;
+    public Square(Coordinates c, double s) { super(4,c); side = s; }
+    public double getArea() { return side*side; }
+    public double getPerimeter() { return 4*side; }
+    public void scale(int f, boolean s) {
+        getCoordinates().scale(f,s);
+        side = s ? side*f : (f!=0 ? side/f : side);
+    }
+    public String display() {
+        return "Square | "+getCoordinates().display()+" | S:"+side+" | Area:"+getArea()+" | Perim:"+getPerimeter();
+    }
+}
