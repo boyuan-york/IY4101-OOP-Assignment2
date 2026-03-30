@@ -1,0 +1,25 @@
+public class Triangle extends Shape {
+    private Coordinates v1, v2, v3;
+    public Triangle(Coordinates a, Coordinates b, Coordinates c) {
+        super(3,a); v1=a; v2=b; v3=c;
+    }
+    private double[] sides() {
+        double a = v2.distance(v3), b=v1.distance(v3), c=v1.distance(v2);
+        return new double[]{a,b,c};
+    }
+    public double getPerimeter() { double[]s=sides(); return s[0]+s[1]+s[2]; }
+    public double getArea() {
+        double[]s=sides(); double a=s[0],b=s[1],c=s[2];
+        double semi=(a+b+c)/2;
+        return Math.sqrt(semi*(semi-a)*(semi-b)*(semi-c));
+    }
+    public void translate(int dx, int dy) {
+        v1.translate(dx,dy); v2.translate(dx,dy); v3.translate(dx,dy);
+    }
+    public void scale(int f, boolean s) {
+        v1.scale(f,s); v2.scale(f,s); v3.scale(f,s);
+    }
+    public String display() {
+        return "Triangle | "+v1.display()+" "+v2.display()+" "+v3.display()+" | Area:"+getArea()+" | Perim:"+getPerimeter();
+    }
+}
