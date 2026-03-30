@@ -1,0 +1,26 @@
+import java.util.*;
+public class ShapeList {
+    private List<Shape> list = new ArrayList<>();
+    public void addShape(Shape s) { list.add(s); }
+    public Shape removeShape(int i) {
+        return (i>=0&&i<list.size()) ? list.remove(i) : null;
+    }
+    public Shape getShape(int i) {
+        return (i>=0&&i<list.size()) ? list.get(i) : null;
+    }
+    public void translateShapes(int dx, int dy) {
+        for(Shape s:list) s.translate(dx,dy);
+    }
+    public void scale(int f, boolean s) {
+        for(Shape sh:list) sh.scale(f,s);
+    }
+    public double area(int i) { Shape s=getShape(i); return s==null?0:s.getArea(); }
+    public double perimeter(int i) { Shape s=getShape(i); return s==null?0:s.getPerimeter(); }
+    public int getNumberOfShapes() { return list.size(); }
+    public String display() {
+        if(list.isEmpty()) return "No shapes";
+        StringBuilder sb=new StringBuilder();
+        for(int i=0;i<list.size();i++) sb.append("["+i+"] "+list.get(i).display()+"\n");
+        return sb.toString();
+    }
+}
