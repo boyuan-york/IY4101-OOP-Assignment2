@@ -1,0 +1,36 @@
+import java.util.Scanner;
+public class ShapeManagement {
+    private static ShapeList sl = new ShapeList();
+    private static Scanner sc = new Scanner(System.in);
+    public static void main(String[]a) { menu(); }
+    private static void menu() {
+        int c; do {
+            System.out.println("\n1:Add 2:Remove 3:Info 4:Area/Perim 5:ShowAll 6:Translate 7:Scale 0:Quit");
+            while(!sc.hasNextInt()) sc.next(); c=sc.nextInt();
+            switch(c) {
+                case 1:add(); break; case2:remove();break;case3:info();break;case4:ap();break;
+                case5:System.out.println(sl.display());break;case6:tran();break;case7:scale();break;
+            }
+        } while(c!=0); sc.close();
+    }
+    private static void add() {
+        System.out.println("1:Tri 2:Rect 3:Circ 4:Sq"); int t=sc.nextInt();
+        if(t==1) {
+            Coordinates a=new Coordinates(sc.nextInt(),sc.nextInt()),
+                        b=new Coordinates(sc.nextInt(),sc.nextInt()),
+                        c=new Coordinates(sc.nextInt(),sc.nextInt());
+            sl.addShape(new Triangle(a,b,c));
+        } else if(t==2) {
+            sl.addShape(new Rectangle(new Coordinates(sc.nextInt(),sc.nextInt()),sc.nextDouble(),sc.nextDouble()));
+        } else if(t==3) {
+            sl.addShape(new Circle(new Coordinates(sc.nextInt(),sc.nextInt()),sc.nextDouble()));
+        } else if(t==4) {
+            sl.addShape(new Square(new Coordinates(sc.nextInt(),sc.nextInt()),sc.nextDouble()));
+        }
+    }
+    private static void remove() { Shape s=sl.removeShape(sc.nextInt()); System.out.println(s==null?"Invalid":s.display()); }
+    private static void info() { Shape s=sl.getShape(sc.nextInt()); System.out.println(s==null?"Invalid":s.display()); }
+    private static void ap() { int p=sc.nextInt(); System.out.println("Area:"+sl.area(p)+" Perim:"+sl.perimeter(p)); }
+    private static void tran() { sl.translateShapes(sc.nextInt(),sc.nextInt()); }
+    private static void scale() { sl.scale(sc.nextInt(),sc.nextInt()==1); }
+}
