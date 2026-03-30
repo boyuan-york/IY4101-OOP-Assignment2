@@ -1,0 +1,16 @@
+public class Rectangle extends Shape {
+    private double width, length;
+    public Rectangle(Coordinates c, double w, double l) {
+        super(4, c); width = w; length = l;
+    }
+    public double getArea() { return width * length; }
+    public double getPerimeter() { return 2*(width+length); }
+    public void scale(int f, boolean s) {
+        getCoordinates().scale(f,s);
+        if (s) { width*=f; length*=f; }
+        else if (f!=0) { width/=f; length/=f; }
+    }
+    public String display() {
+        return "Rectangle | "+getCoordinates().display()+" | W:"+width+" L:"+length+" | Area:"+getArea()+" | Perim:"+getPerimeter();
+    }
+}
